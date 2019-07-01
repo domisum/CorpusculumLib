@@ -1,0 +1,7 @@
+name: CorpusculumLib
+version: ${project.version}
+author: domisum
+main: de.domisum.lib.corpusculumlib.CorpusculumLib
+api-version: 1.13
+depend:
+  - Citizens
