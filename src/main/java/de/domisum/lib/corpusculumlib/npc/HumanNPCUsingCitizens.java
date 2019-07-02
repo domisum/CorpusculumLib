@@ -29,8 +29,12 @@ public class HumanNPCUsingCitizens implements HumanNPC
 	public HumanNPCUsingCitizens(NPC citizensNpc)
 	{
 		Validate.notNull(citizensNpc, "citizensNpc can't be null");
+		Validate.isTrue(citizensNpc.isSpawned(), "citizensNps has to be spawned");
 
 		this.citizensNpc = citizensNpc;
+
+
+		citizensNpc.setProtected(false);
 	}
 
 
@@ -113,6 +117,7 @@ public class HumanNPCUsingCitizens implements HumanNPC
 	}
 
 
+	// MOVEMENT
 	@Override
 	public Location getLocation()
 	{
@@ -126,6 +131,12 @@ public class HumanNPCUsingCitizens implements HumanNPC
 	}
 
 	@Override
+	public void lookAt(Location location)
+	{
+		citizensNpc.faceLocation(location);
+	}
+
+	@Override
 	public Vector getVelocity()
 	{
 		return citizensNpc.getEntity().getVelocity();
@@ -135,6 +146,17 @@ public class HumanNPCUsingCitizens implements HumanNPC
 	public void setVelocity(Vector velocity)
 	{
 		citizensNpc.getEntity().setVelocity(velocity);
+	}
+
+	@Override
+	public void jump()
+	{
+		if(!getPlayer().isOnGround())
+			return;
+
+		final double jumpYVelocity = 0.4;
+		Vector newVelocity = getVelocity().setY(jumpYVelocity);
+		setVelocity(newVelocity);
 	}
 
 	@Override

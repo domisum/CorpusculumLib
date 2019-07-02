@@ -1,9 +1,10 @@
 package de.domisum.lib.corpusculumlib;
 
+import de.domisum.lib.auxiliumspigot.util.DebugUtil;
+import de.domisum.lib.corpusculumlib.npc.HumanNPC;
+import de.domisum.lib.corpusculumlib.npc.HumanNPCUsingCitizens;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.trait.trait.Equipment;
-import net.citizensnpcs.api.trait.trait.Equipment.EquipmentSlot;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -43,11 +44,21 @@ public class CorpusculumListener implements Listener
 
 		NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Notch");
 		npc.spawn(e.getPlayer().getLocation());
-		npc.setProtected(false);
 
-		Equipment equipment = npc.getTrait(Equipment.class);
-		equipment.set(EquipmentSlot.HELMET, new ItemStack(Material.DIAMOND_HELMET));
-		equipment.set(EquipmentSlot.HAND, new ItemStack(Material.TORCH));
+
+		HumanNPC humanNpc = new HumanNPCUsingCitizens(npc);
+		DebugUtil.say("boots: "+humanNpc.getBoots());
+		humanNpc.setItemInOffHand(new ItemStack(Material.BROWN_WOOL));
+
+		corpusculumLib.getServer().getScheduler().runTaskLater(corpusculumLib, ()->
+		{
+			humanNpc.swingMainArm();
+			humanNpc.jump();
+			humanNpc.lookAt(e.getPlayer().getLocation());
+		}, 3*20L);
+
+
+		corpusculumLib.getServer().getScheduler().runTaskLater(corpusculumLib, npc::destroy, 10*20L);
 	}
 
 }

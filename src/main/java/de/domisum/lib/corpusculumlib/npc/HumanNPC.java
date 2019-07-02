@@ -54,11 +54,16 @@ public interface HumanNPC
 	void teleport(Location location);
 
 	@API
+	void lookAt(Location location);
+
+	@API
 	Vector getVelocity();
 
 	@API
 	void setVelocity(Vector velocity);
 
+	@API
+	void jump();
 
 	@API
 	void swingMainArm();
