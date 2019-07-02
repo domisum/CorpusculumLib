@@ -2,9 +2,10 @@ package de.domisum.lib.corpusculumlib;
 
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.api.trait.trait.Equipment;
+import net.citizensnpcs.api.trait.trait.Equipment.EquipmentSlot;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -44,9 +45,9 @@ public class CorpusculumListener implements Listener
 		npc.spawn(e.getPlayer().getLocation());
 		npc.setProtected(false);
 
-		Player player = (Player) npc.getEntity();
-		player.getInventory().setHelmet(new ItemStack(Material.DIAMOND_HELMET));
-		player.getInventory().setItemInMainHand(new ItemStack(Material.TORCH));
+		Equipment equipment = npc.getTrait(Equipment.class);
+		equipment.set(EquipmentSlot.HELMET, new ItemStack(Material.DIAMOND_HELMET));
+		equipment.set(EquipmentSlot.HAND, new ItemStack(Material.TORCH));
 	}
 
 }
