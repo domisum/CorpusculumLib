@@ -71,4 +71,19 @@ public interface HumanNPC
 	@API
 	void swingOffArm();
 
+
+	// ACTIONS
+	@API
+	boolean isSneaking();
+
+	@API
+	void setSneaking(boolean sneaking);
+
+	@API
+	boolean isSprinting();
+
+	@API
+	void setSprinting(boolean sprinting);
+
+
 }

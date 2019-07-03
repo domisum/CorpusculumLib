@@ -172,6 +172,32 @@ public class HumanNPCUsingCitizens implements HumanNPC
 	}
 
 
+	// ACTIONS
+	@Override
+	public boolean isSneaking()
+	{
+		return getPlayer().isSneaking();
+	}
+
+	@Override
+	public void setSneaking(boolean sneaking)
+	{
+		getPlayer().setSneaking(sneaking);
+	}
+
+	@Override
+	public boolean isSprinting()
+	{
+		return getPlayer().isSprinting();
+	}
+
+	@Override
+	public void setSprinting(boolean sprinting)
+	{
+		getPlayer().setSprinting(true);
+	}
+
+
 	// PACKETS
 	private void sendAnimationPacket(int animationId)
 	{
