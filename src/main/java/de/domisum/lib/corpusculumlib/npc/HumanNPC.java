@@ -2,6 +2,7 @@ package de.domisum.lib.corpusculumlib.npc;
 
 import de.domisum.lib.auxilium.util.java.annotations.API;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
@@ -99,12 +100,27 @@ public interface HumanNPC {
     @API
     boolean getGlowing();
 
+    @API
+    void setOnFire(boolean onFire);
+
     //OTHER
     @API
     void setNumberOfArrowsInBody(int arrows);
 
     @API
     int getNumberOfArrowsInBody();
+
+    @API
+    void setDisplayName(String displayName);
+
+    @API
+    String getDisplayName();
+
+    @API
+    void showToPlayer(Player player);
+
+    @API
+    void hideFromPlayer(Player player);
 
 
 }

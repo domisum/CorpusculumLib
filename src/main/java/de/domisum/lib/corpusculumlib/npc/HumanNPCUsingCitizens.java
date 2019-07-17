@@ -176,6 +176,12 @@ public class HumanNPCUsingCitizens implements HumanNPC {
         PlayerAnimation.HURT.play(getPlayer());
     }
 
+    @Override
+    public void setOnFire(boolean onFire) {
+        if (onFire) getPlayer().setFireTicks(1);
+        else getPlayer().setFireTicks(0);
+    }
+
     //TODO: start doing blocking with a 'counter' var?
 
     @Override
@@ -209,6 +215,26 @@ public class HumanNPCUsingCitizens implements HumanNPC {
     @Override
     public int getNumberOfArrowsInBody() {
         return 0;
+    }
+
+    @Override
+    public void setDisplayName(String displayName) {
+        citizensNpc.setName(displayName);
+    }
+
+    @Override
+    public String getDisplayName() {
+        return citizensNpc.getName();
+    }
+
+    @Override
+    public void showToPlayer(Player player) {
+        player.showPlayer(getPlayer());
+    }
+
+    @Override
+    public void hideFromPlayer(Player player) {
+        player.hidePlayer(getPlayer());
     }
 
     // PACKETS
