@@ -1,15 +1,14 @@
 package de.domisum.lib.corpusculumlib.npc;
 
-import de.domisum.lib.auxiliumspigot.util.ReflectionUtil;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.trait.Equipment;
 import net.citizensnpcs.api.trait.trait.Equipment.EquipmentSlot;
-import net.minecraft.server.v1_13_R2.Packet;
-import net.minecraft.server.v1_13_R2.PacketPlayOutAnimation;
+import net.citizensnpcs.util.PlayerAnimation;
+//import net.minecraft.server.v1_13_R2.Packet;
+//import net.minecraft.server.v1_13_R2.PacketPlayOutAnimation;
 import org.apache.commons.lang3.Validate;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
+//import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.ItemStack;
@@ -23,6 +22,9 @@ public class HumanNPCUsingCitizens implements HumanNPC
 
 	// REFERENCES
 	private final NPC citizensNpc;
+
+	// VARIABLES
+	private boolean blocking;
 
 
 	// INIT
@@ -151,7 +153,7 @@ public class HumanNPCUsingCitizens implements HumanNPC
 	@Override
 	public void jump()
 	{
-		if(!getPlayer().isOnGround())
+		if (!getPlayer().isOnGround())
 			return;
 
 		final double jumpYVelocity = 0.4;
@@ -162,15 +164,26 @@ public class HumanNPCUsingCitizens implements HumanNPC
 	@Override
 	public void swingMainArm()
 	{
-		sendAnimationPacket(0);
+		PlayerAnimation.ARM_SWING.play(getPlayer());
 	}
 
 	@Override
 	public void swingOffArm()
 	{
-		sendAnimationPacket(3);
+		PlayerAnimation.ARM_SWING_OFFHAND.play(getPlayer());
 	}
 
+	@Override
+	public boolean hasFly()
+	{
+		return getPlayer().isFlying();
+	}
+
+	@Override
+	public void setFly(boolean fly)
+	{
+		getPlayer().setFlying(fly);
+	}
 
 	// ACTIONS
 	@Override
@@ -197,23 +210,100 @@ public class HumanNPCUsingCitizens implements HumanNPC
 		getPlayer().setSprinting(true);
 	}
 
+	@Override
+	public void showDamage()
+	{
+		PlayerAnimation.HURT.play(getPlayer());
+	}
+
+	@Override
+	public void setOnFire(boolean onFire)
+	{
+		if (onFire) getPlayer().setFireTicks(1);
+		else getPlayer().setFireTicks(0);
+	}
+
+	//TODO: start doing blocking with a 'counter' var?
+
+	@Override
+	public void setBlocking(boolean blocking)
+	{
+		this.blocking = blocking;
+		if (blocking)
+			PlayerAnimation.START_USE_MAINHAND_ITEM.play(getPlayer());
+		else PlayerAnimation.STOP_USE_ITEM.play(getPlayer());
+	}
+
+	@Override
+	public boolean getBlocking()
+	{
+		return blocking;
+	}
+
+	@Override
+	public boolean getGlowing()
+	{
+		return getPlayer().isGlowing();
+	}
+
+	@Override
+	public void setGlowing(boolean glowing)
+	{
+		getPlayer().setGlowing(glowing);
+	}
+
+
+	@Override
+	public void setNumberOfArrowsInBody(int arrows)
+	{
+		//TODO: do
+	}
+
+	@Override
+	public int getNumberOfArrowsInBody()
+	{
+		return 0;
+	}
+
+	@Override
+	public void setDisplayName(String displayName)
+	{
+		citizensNpc.setName(displayName);
+	}
+
+	@Override
+	public String getDisplayName()
+	{
+		return citizensNpc.getName();
+	}
+
+	@Override
+	public void showToPlayer(Player player)
+	{
+		player.showPlayer(getPlayer());
+	}
+
+	@Override
+	public void hideFromPlayer(Player player)
+	{
+		player.hidePlayer(getPlayer());
+	}
 
 	// PACKETS
-	private void sendAnimationPacket(int animationId)
-	{
-		PacketPlayOutAnimation packet = new PacketPlayOutAnimation();
-		ReflectionUtil.setDeclaredFieldValue(packet, "a", getPlayer().getEntityId());
-		ReflectionUtil.setDeclaredFieldValue(packet, "b", animationId);
+    /* This is done using NMS, but Citizens has a built in way to play animations. Might be used later?
+    private void sendAnimationPacket(int animationId) {
+        PacketPlayOutAnimation packet = new PacketPlayOutAnimation();
+        ReflectionUtil.setDeclaredFieldValue(packet, "a", getPlayer().getEntityId());
+        ReflectionUtil.setDeclaredFieldValue(packet, "b", animationId);
 
-		sendPacket(packet);
-	}
+        sendPacket(packet);
+    }
 
-	private void sendPacket(Packet<?> packet)
-	{
-		for(Player p : Bukkit.getOnlinePlayers())
-			if(p.getLocation().distance(getLocation()) < VIEW_DISTANCE)
-				((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
-	}
+    private void sendPacket(Packet<?> packet) {
+        for (Player p : Bukkit.getOnlinePlayers())
+            if (p.getLocation().distance(getLocation()) < VIEW_DISTANCE)
+                ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
+    }*/
 
 	// UTIL
 	private Player getPlayer()

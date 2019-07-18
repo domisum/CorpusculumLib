@@ -36,10 +36,10 @@ public class CorpusculumListener implements Listener
 	@EventHandler
 	public void test(PlayerInteractEvent e)
 	{
-		if(e.getAction() == Action.PHYSICAL)
+		if (e.getAction() == Action.PHYSICAL)
 			return;
 
-		if(e.getPlayer().getInventory().getItemInMainHand().getType() != Material.GOLDEN_SWORD)
+		if (e.getPlayer().getInventory().getItemInMainHand().getType() != Material.GOLDEN_SWORD)
 			return;
 
 		NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, "Notch");
@@ -47,18 +47,20 @@ public class CorpusculumListener implements Listener
 
 
 		HumanNPC humanNpc = new HumanNPCUsingCitizens(npc);
-		DebugUtil.say("boots: "+humanNpc.getBoots());
-		humanNpc.setItemInOffHand(new ItemStack(Material.BROWN_WOOL));
+		DebugUtil.say("boots: " + humanNpc.getBoots());
+		humanNpc.setItemInOffHand(new ItemStack(Material.GOLD_INGOT));
+		humanNpc.setBoots(new ItemStack(Material.DIAMOND_BOOTS));
 
-		corpusculumLib.getServer().getScheduler().runTaskLater(corpusculumLib, ()->
+		corpusculumLib.getServer().getScheduler().runTaskLater(corpusculumLib, () ->
 		{
 			humanNpc.swingMainArm();
 			humanNpc.jump();
 			humanNpc.lookAt(e.getPlayer().getLocation());
-		}, 3*20L);
+			humanNpc.showDamage();
+		}, 3 * 20L);
 
 
-		corpusculumLib.getServer().getScheduler().runTaskLater(corpusculumLib, npc::destroy, 10*20L);
+		corpusculumLib.getServer().getScheduler().runTaskLater(corpusculumLib, npc::destroy, 10 * 20L);
 	}
 
 }

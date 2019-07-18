@@ -2,6 +2,7 @@ package de.domisum.lib.corpusculumlib.npc;
 
 import de.domisum.lib.auxilium.util.java.annotations.API;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
@@ -71,8 +72,27 @@ public interface HumanNPC
 	@API
 	void swingOffArm();
 
+	@API
+	void setBlocking(boolean blocking);
+
+	@API
+	boolean getBlocking();
+
+	@API
+	void setFly(boolean fly);
+
+	@API
+	boolean hasFly();
+
 
 	// ACTIONS
+
+	@API
+	void showToPlayer(Player player);
+
+	@API
+	void hideFromPlayer(Player player);
+
 	@API
 	boolean isSneaking();
 
@@ -84,6 +104,31 @@ public interface HumanNPC
 
 	@API
 	void setSprinting(boolean sprinting);
+
+	@API
+	void showDamage();
+
+	@API
+	void setGlowing(boolean glowing);
+
+	@API
+	boolean getGlowing();
+
+	@API
+	void setOnFire(boolean onFire);
+
+	//OTHER
+	@API
+	void setNumberOfArrowsInBody(int arrows);
+
+	@API
+	int getNumberOfArrowsInBody();
+
+	@API
+	void setDisplayName(String displayName);
+
+	@API
+	String getDisplayName();
 
 
 }

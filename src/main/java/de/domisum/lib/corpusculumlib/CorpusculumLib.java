@@ -1,5 +1,6 @@
 package de.domisum.lib.corpusculumlib;
 
+import de.domisum.lib.auxiliumspigot.AuxiliumSpigotLib;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CorpusculumLib extends JavaPlugin
@@ -11,13 +12,15 @@ public class CorpusculumLib extends JavaPlugin
 	{
 		new CorpusculumListener(this);
 
-		getLogger().info(getClass().getSimpleName()+" has been enabled");
+		AuxiliumSpigotLib.enable(this);
+
+		getLogger().info(getClass().getSimpleName() + " has been enabled");
 	}
 
 	@Override
 	public void onDisable()
 	{
-		getLogger().info(getClass().getSimpleName()+" has been disabled");
+		getLogger().info(getClass().getSimpleName() + " has been disabled");
 	}
 
 }
