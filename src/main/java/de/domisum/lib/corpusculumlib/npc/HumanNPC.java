@@ -6,128 +6,129 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-public interface HumanNPC {
+public interface HumanNPC
+{
 
-    // EQUIPMENT
-    @API
-    ItemStack getHelmet();
+	// EQUIPMENT
+	@API
+	ItemStack getHelmet();
 
-    @API
-    void setHelmet(ItemStack helmet);
+	@API
+	void setHelmet(ItemStack helmet);
 
-    @API
-    ItemStack getChestPlate();
+	@API
+	ItemStack getChestPlate();
 
-    @API
-    void setChestPlate(ItemStack chestPlate);
+	@API
+	void setChestPlate(ItemStack chestPlate);
 
-    @API
-    ItemStack getLeggings();
+	@API
+	ItemStack getLeggings();
 
-    @API
-    void setLeggings(ItemStack leggings);
+	@API
+	void setLeggings(ItemStack leggings);
 
-    @API
-    ItemStack getBoots();
+	@API
+	ItemStack getBoots();
 
-    @API
-    void setBoots(ItemStack boots);
+	@API
+	void setBoots(ItemStack boots);
 
-    @API
-    ItemStack getItemInMainHand();
+	@API
+	ItemStack getItemInMainHand();
 
-    @API
-    void setItemInMainHand(ItemStack itemInMainHand);
+	@API
+	void setItemInMainHand(ItemStack itemInMainHand);
 
-    @API
-    ItemStack getItemInOffHand();
+	@API
+	ItemStack getItemInOffHand();
 
-    @API
-    void setItemInOffHand(ItemStack itemInOffHand);
-
-
-    // MOVEMENT
-    @API
-    Location getLocation();
-
-    @API
-    void teleport(Location location);
-
-    @API
-    void lookAt(Location location);
-
-    @API
-    Vector getVelocity();
-
-    @API
-    void setVelocity(Vector velocity);
-
-    @API
-    void jump();
-
-    @API
-    void swingMainArm();
-
-    @API
-    void swingOffArm();
-
-    @API
-    void setBlocking(boolean blocking);
-
-    @API
-    boolean getBlocking();
-
-    @API
-    void setFly(boolean fly);
-
-    @API
-    boolean hasFly();
+	@API
+	void setItemInOffHand(ItemStack itemInOffHand);
 
 
-    // ACTIONS
+	// MOVEMENT
+	@API
+	Location getLocation();
 
-    @API
-    void showToPlayer(Player player);
+	@API
+	void teleport(Location location);
 
-    @API
-    void hideFromPlayer(Player player);
+	@API
+	void lookAt(Location location);
 
-    @API
-    boolean isSneaking();
+	@API
+	Vector getVelocity();
 
-    @API
-    void setSneaking(boolean sneaking);
+	@API
+	void setVelocity(Vector velocity);
 
-    @API
-    boolean isSprinting();
+	@API
+	void jump();
 
-    @API
-    void setSprinting(boolean sprinting);
+	@API
+	void swingMainArm();
 
-    @API
-    void showDamage();
+	@API
+	void swingOffArm();
 
-    @API
-    void setGlowing(boolean glowing);
+	@API
+	void setBlocking(boolean blocking);
 
-    @API
-    boolean getGlowing();
+	@API
+	boolean getBlocking();
 
-    @API
-    void setOnFire(boolean onFire);
+	@API
+	void setFly(boolean fly);
 
-    //OTHER
-    @API
-    void setNumberOfArrowsInBody(int arrows);
+	@API
+	boolean hasFly();
 
-    @API
-    int getNumberOfArrowsInBody();
 
-    @API
-    void setDisplayName(String displayName);
+	// ACTIONS
 
-    @API
-    String getDisplayName();
+	@API
+	void showToPlayer(Player player);
+
+	@API
+	void hideFromPlayer(Player player);
+
+	@API
+	boolean isSneaking();
+
+	@API
+	void setSneaking(boolean sneaking);
+
+	@API
+	boolean isSprinting();
+
+	@API
+	void setSprinting(boolean sprinting);
+
+	@API
+	void showDamage();
+
+	@API
+	void setGlowing(boolean glowing);
+
+	@API
+	boolean getGlowing();
+
+	@API
+	void setOnFire(boolean onFire);
+
+	//OTHER
+	@API
+	void setNumberOfArrowsInBody(int arrows);
+
+	@API
+	int getNumberOfArrowsInBody();
+
+	@API
+	void setDisplayName(String displayName);
+
+	@API
+	String getDisplayName();
 
 
 }
