@@ -150,6 +150,15 @@ public class HumanNPCUsingCitizens implements HumanNPC {
         PlayerAnimation.ARM_SWING_OFFHAND.play(getPlayer());
     }
 
+    @Override
+    public boolean hasFly() {
+        return getPlayer().isFlying();
+    }
+
+    @Override
+    public void setFly(boolean fly) {
+        getPlayer().setFlying(fly);
+    }
 
     // ACTIONS
     @Override

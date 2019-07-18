@@ -77,8 +77,21 @@ public interface HumanNPC {
     @API
     boolean getBlocking();
 
+    @API
+    void setFly(boolean fly);
+
+    @API
+    boolean hasFly();
+
 
     // ACTIONS
+
+    @API
+    void showToPlayer(Player player);
+
+    @API
+    void hideFromPlayer(Player player);
+
     @API
     boolean isSneaking();
 
@@ -115,12 +128,6 @@ public interface HumanNPC {
 
     @API
     String getDisplayName();
-
-    @API
-    void showToPlayer(Player player);
-
-    @API
-    void hideFromPlayer(Player player);
 
 
 }
