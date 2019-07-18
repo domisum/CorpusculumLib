@@ -44,13 +44,15 @@ public class CorpusculumListener implements Listener {
 
         HumanNPC humanNpc = new HumanNPCUsingCitizens(npc);
         DebugUtil.say("boots: " + humanNpc.getBoots());
-        humanNpc.setItemInOffHand(new ItemStack(Material.BROWN_WOOL));
+        humanNpc.setItemInOffHand(new ItemStack(Material.GOLD_INGOT));
+        humanNpc.setBoots(new ItemStack(Material.DIAMOND_BOOTS));
 
         corpusculumLib.getServer().getScheduler().runTaskLater(corpusculumLib, () ->
         {
             humanNpc.swingMainArm();
             humanNpc.jump();
             humanNpc.lookAt(e.getPlayer().getLocation());
+            humanNpc.showDamage();
         }, 3 * 20L);
 
 

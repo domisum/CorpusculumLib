@@ -106,11 +106,11 @@
 				<version>1.4</version>
 				<executions>
 					<execution>
-						<phase>install</phase>
+						<phase>package</phase>
 						<configuration>
 							<tasks>
 								<copy file="${basedir}/target/${project.artifactId}-${project.version}.jar"
-									  tofile="C:/Users/domisum/minecraft/servers/testserver/plugins/${project.artifactId}.jar"
+									  tofile="C:/Users/Yassir/Documents/NPC Testing/plugins/${project.artifactId}.jar"
 									  overwrite="true"/>
 							</tasks>
 						</configuration>

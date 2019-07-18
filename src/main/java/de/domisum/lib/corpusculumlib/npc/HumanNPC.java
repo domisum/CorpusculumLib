@@ -75,7 +75,7 @@ public interface HumanNPC {
     void setBlocking(boolean blocking);
 
     @API
-    void getBlocking();
+    boolean getBlocking();
 
 
     // ACTIONS
